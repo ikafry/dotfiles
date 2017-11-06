@@ -6,6 +6,9 @@ set t_Co=256
 
 set tabstop=3
 
+set cursorline
+highlight CursorLine term=none cterm=none ctermfg=none ctermbg=darkgray
+
 set clipboard=unnamed,autoselect
 
 set nocompatible

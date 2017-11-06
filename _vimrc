@@ -1,4 +1,10 @@
+:syntax on
+
 set tabstop=3
+
+set clipboard=unnamed,autoselect
+
+set nocompatible
 
 " 行番号を表示
 "set number
@@ -55,17 +61,11 @@ nnoremap <silent><F4> :call Sn()<CR>
 
 :command! -nargs=+ Sub %s/<args>/<args>/g
 
-
-function Sp()
-  if &paste
-    setlocal nopaste
-  else
-    setlocal paste
-  endif
-endfunction
-
 set pastetoggle=<F3>
 
+set cindent
+set showcmd
+set backspace=indent,eol,start
 "----------------------NeoBandle設定---------------------"
 
 if has('vim_starting')
@@ -81,13 +81,34 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 
+" solarized カラースキーム
+  NeoBundle 'altercation/vim-colors-solarized'
+" mustang カラースキーム
+  NeoBundle 'croaker/mustang-vim'
+" wombat カラースキーム
+  NeoBundle 'jeffreyiacono/vim-colors-wombat'
+" jellybeans カラースキーム
+  NeoBundle 'nanotech/jellybeans.vim'
+" lucius カラースキーム
+  NeoBundle 'vim-scripts/Lucius'
+" zenburn カラースキーム
+  NeoBundle 'vim-scripts/Zenburn'
+" mrkn256 カラースキーム
+  NeoBundle 'mrkn/mrkn256.vim'
+" railscasts カラースキーム
+  NeoBundle 'jpo/vim-railscasts-theme'
+" pyte カラースキーム
+  NeoBundle 'therubymug/vim-pyte'
+" molokai カラースキーム
+  NeoBundle 'tomasr/molokai'
+
 call neobundle#end()
 
 " NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
 NeoBundleCheck
 
 " ファイルタイプ別のプラグイン/インデントを有効にする
-filetype plugin on
+filetype plugin indent on
 "----------------------------------------------------"
 
 "---------------------CompleCache設定----------------------------"

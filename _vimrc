@@ -91,6 +91,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'junegunn/vim-easy-align'
 "スニペットの補完機能
 NeoBundle "Shougo/neosnippet"
 "スニペット集
@@ -234,6 +235,7 @@ let g:syntastic_cpp_compiler="gcc"
 "-----------------------------------------------------------
 "textmanipの設定
 "-----------------------------------------------------------
+"選択したテキストの移動
 xmap <Space>d <Plug>(textmanip-duplicate-down)
 nmap <Space>d <Plug>(textmanip-duplicate-down)
 xmap <Space>D <Plug>(textmanip-duplicate-up)
@@ -248,4 +250,13 @@ xmap <C-l> <Plug>(textmanip-move-right)
 " toggle insert/replace with <F10>
 nmap <F10> <Plug>(textmanip-toggle-mode)
 xmap <F10> <Plug>(textmanip-toggle-mode)
+"-------------------------------------------------------------
+"
+"-------------------------------------------------------------
+"EasyAlignの設定
+"-------------------------------------------------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 "-------------------------------------------------------------

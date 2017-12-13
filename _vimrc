@@ -6,6 +6,9 @@ set t_Co=256
 
 set tabstop=3
 
+set cindent
+set shiftwidth=3
+
 set cursorline
 highlight CursorLine term=none cterm=none ctermfg=none ctermbg=darkgray
 
@@ -16,7 +19,7 @@ set nocompatible
 set fileencoding=utf-8 " 保存時の文字コード
 set fileencodings=ucs-boms,utf-8,euc-jp,cp932 " 読み込み時の文字コードの自動判別. 左側が優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先される
-set ambiwidth=double " □や○文字が崩れる問題を解決
+"set ambiwidth=double " □や○文字が崩れる問題を解決
 
 set wildmenu " コマンドモードの補完
 set history=5000 " 保存するコマンド履歴の数
@@ -134,8 +137,8 @@ filetype plugin indent on
 
 " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
 let g:neocomplete#enable_smart_case = 1
-" 3文字以上の単語に対して補完を有効にする
-let g:neocomplete#min_keyword_length = 3
+" 2文字以上の単語に対して補完を有効にする
+let g:neocomplete#min_keyword_length = 2
 " 区切り文字まで補完する
 let g:neocomplete#enable_auto_delimiter = 1
 " 1文字目の入力から補完のポップアップを表示
@@ -143,9 +146,9 @@ let g:neocomplete#auto_completion_start_length = 1
 " バックスペースで補完のポップアップを閉じる
 inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
 
-" エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定・・・・・・②
+" エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定
 imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
-" タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ・・・・・・③
+" タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ
 imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 
 "---------------------CompleCache設定----------------------------"
@@ -154,9 +157,9 @@ let g:acp_enableAtStartup = 0
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
+let g:neocomplcache_enable_underbar_completion = 1
+"  '_' 区切りの補完を有効化
 let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
@@ -168,19 +171,14 @@ let g:neocomplcache_dictionary_filetype_lists = {
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplcache#smart_close_popup() . "\<CR>"
-endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
 
 "----------------------------------------------------------"
 
@@ -242,10 +240,10 @@ xmap <Space>D <Plug>(textmanip-duplicate-up)
 nmap <Space>D <Plug>(textmanip-duplicate-up)
 
 "ctr+キーで移動
-xmap <C-j> <Plug>(textmanip-move-down)
-xmap <C-k> <Plug>(textmanip-move-up)
-xmap <C-h> <Plug>(textmanip-move-left)
-xmap <C-l> <Plug>(textmanip-move-right)
+xmap <C-DOWN> <Plug>(textmanip-move-down)
+xmap <C-UP> <Plug>(textmanip-move-up)
+xmap <C-LEFT> <Plug>(textmanip-move-left)
+xmap <C-RIGHT> <Plug>(textmanip-move-right)
 
 " toggle insert/replace with <F10>
 nmap <F10> <Plug>(textmanip-toggle-mode)
@@ -260,3 +258,5 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 "-------------------------------------------------------------
+"
+

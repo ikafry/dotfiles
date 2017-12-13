@@ -22,7 +22,7 @@ set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先�
 "set ambiwidth=double " □や○文字が崩れる問題を解決
 
 set wildmenu " コマンドモードの補完
-set history=5000 " 保存するコマンド履歴の数
+set history=2000 " 保存するコマンド履歴の数
 
 " ESC連打でハイライト解除
 nmap <silent><Esc><Esc> :nohlsearch<CR><Esc>

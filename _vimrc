@@ -40,17 +40,19 @@ nnoremap <F5> :Gcc<CR><CR>
 command! Gcc call Gcc()
 function! Gcc()
 	if(search("math.h") == 1)
-   :w
-   :!gcc % -o %:r % -lm
+	:w
+	:!gcc % -o %:r % -lm
 	:!./%:r
 
 	else
 	:w
-   :!gcc % -o %:r
-   :!./%:r
+	:!gcc % -o %:r
+	:!./%:r
 
 	endif
 endfunction
+
+nnoremap <F6> :QuickRun<CR>
 
 :autocmd BufNewFile  *.c      0r ~/vim/skeleton.c
 
@@ -89,12 +91,12 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'thinca/vim-quickrun'
 "スニペットの補完機能
 NeoBundle "Shougo/neosnippet"
 "スニペット集
@@ -259,4 +261,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 "-------------------------------------------------------------
 "
+"-------------------------------------------------------------
+"QuickRun設定
+"-------------------------------------------------------------
+set splitright "新しいウィンドウを右に開く
 

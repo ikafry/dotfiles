@@ -1,2 +1,2 @@
 # dotfiles
-#基本的にvimの設定ファイル置き場
+Contain dotfiles

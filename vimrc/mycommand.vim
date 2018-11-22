@@ -1,22 +1,25 @@
 "実行コマンド
-nnoremap <F5> :Gcc<CR><CR>
 
 command! Gcc call Gcc()
 function! Gcc()
-   if(search("math.h","w")==1)
+   if(search("math","w")!=0)
    :w
-   :!gcc % -o %:r % -lm
-   :!./%:r
+   :!gcc %:r.c -lm
+   :!./a.out
+
+	elseif(search("curses", "w")!=0)
+	:w
+	:!gcc %:r.c -lncurses
+	:!./a.out
 
    else
    :w
-   :!gcc % -o %:r
-   :!./%:r
+   :!gcc %:r.c
+   :!./a.out
 
    endif
 endfunction
 
-:autocmd BufNewFile  *.c      0r ~/vim/skeleton.c
 
 function! Sn()
   if &number
@@ -28,9 +31,6 @@ endfunction
 
 nnoremap <silent><F4> :call Sn()<CR>
 
-nnoremap <F6> :QuickRun<CR>
-
 set pastetoggle=<F3>
 
-" ESC連打でハイライト解除
-nmap <silent><Esc><Esc> :nohlsearch<CR><Esc>
+

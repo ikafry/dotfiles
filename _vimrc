@@ -1,5 +1,5 @@
 "Configure ColorScheme
-colorscheme molokai
+colorscheme zenburn
 
 set noswapfile
 
@@ -7,14 +7,16 @@ set encoding=utf-8
 
 scriptencoding utf-8
 
-syntax enable
+syntax on
 set t_Co=256
 
+set expandtab
 set tabstop=3
+set shiftwidth=3
+
 
 set cursorline
 highlight CursorLine term=reverse cterm=none ctermfg=none
-"ctermbg=grey
 
 set clipboard=unnamed,autoselect
 
@@ -41,7 +43,7 @@ set hlsearch
 
 :command! -nargs=+ Sub %s/<args>/<args>/g
 
-":autocmd BufNewFile  *.c      0r ~/.vim/template/c/template_c.c
+" :autocmd BufNewFile  *.c      0r ~/.vim/template/c/template_c.c
 
 set cindent
 set backspace=indent,eol,start
@@ -54,54 +56,82 @@ runtime! userautoload/*.vim
 set guifont=Cica:h16
 set printfont=Cica:h12
 set ambiwidth=single
+
+"----------------------dein.vim設定----------------------"
+"
+"let s:dein_dir = expand('~/.vim/dein')
+"
+"let s:dein_repo_dir = s:dein_dir . '/repos/Shougo/dein.vim'
+"
+"if dein#load_state(s:dein_dir)
+"   call dein#begin(s:dein_dir)
+"
+"   "プラグインのTOMLファイル
+"   let g:rc_dir    = expand('~/.vim/dein/rc')
+"   let s:toml      = g:rc_dir . '/dein.toml'
+"   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+"
+"   "TOMLファイルのキャッシュ
+"   call dein#load_toml(s:toml,      {'lazy':0})
+"   call dein#load_toml(s:lazy_toml, {'lazy':1})
+"
+"   call dein#end()
+"   call dein#save_state()
+"endif
+"
+"if dein#check_install()
+"   call dein#install()
+"endif
+"--------------------------------------------------------"
+
 "----------------------NeoBandle設定---------------------"
 
-if has('vim_starting')
-   " 初回起動時のみruntimepathにneobundleのパスを指定する
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+ if has('vim_starting')
+    " 初回起動時のみruntimepathにneobundleのパスを指定する
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
 
-" NeoBundleを初期化
-call neobundle#begin(expand('~/.vim/bundle/'))
+ " NeoBundleを初期化
+ call neobundle#begin(expand('~/.vim/bundle/'))
 
-"プラグインのインストール
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'ConradIrwin/vim-bracketed-paste'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-"スニペットの補完機能
-NeoBundle "Shougo/neosnippet"
-"スニペット集
-NeoBundle 'Shougo/neosnippet-snippets'
-" 構文エラーチェック
-NeoBundle 'scrooloose/syntastic'
-"Devicons表示
-NeoBundle 'ryanoasis/vim-devicons'
-"ファイル検索
-NeoBundle 'ctrlpvim/ctrlp.vim'
-"複数行の同時コメントアウト実現
-NeoBundle 'tomtom/tcomment_vim'
-"_________________________________________________________
-" jellybeans カラースキーム
-  NeoBundle 'nanotech/jellybeans.vim'
-" zenburn カラースキーム
-  NeoBundle 'jnurmine/Zenburn'
-" molokai カラースキーム
-  NeoBundle 'tomasr/molokai'
-"_________________________________________________________
+ "プラグインのインストール
+ NeoBundle 'Shougo/neocomplcache'
+ NeoBundle 'Townk/vim-autoclose'
+ NeoBundle 'Shougo/unite.vim'
+ NeoBundle 'ujihisa/unite-colorscheme'
+ NeoBundle 'Shougo/neomru.vim'
+ NeoBundle 'scrooloose/nerdtree'
+ NeoBundle 'ConradIrwin/vim-bracketed-paste'
+ NeoBundle 'vim-airline/vim-airline'
+ NeoBundle 'vim-airline/vim-airline-themes'
+ "スニペットの補完機能
+ NeoBundle "Shougo/neosnippet"
+ "スニペット集
+ NeoBundle 'Shougo/neosnippet-snippets'
+ " 構文エラーチェック
+ "NeoBundle 'scrooloose/syntastic'
+ "Devicons表示
+ NeoBundle 'ryanoasis/vim-devicons'
+ "ファイル検索
+ NeoBundle 'ctrlpvim/ctrlp.vim'
+ "複数行の同時コメントアウト実現
+ NeoBundle 'tomtom/tcomment_vim'
+ "_________________________________________________________
+ " jellybeans カラースキーム
+   NeoBundle 'nanotech/jellybeans.vim'
+ " zenburn カラースキーム
+   NeoBundle 'jnurmine/Zenburn'
+ " molokai カラースキーム
+   NeoBundle 'tomasr/molokai'
+ "_________________________________________________________
 
-call neobundle#end()
+ call neobundle#end()
 
-" NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
-NeoBundleCheck
+ " NeoBundleCheck を走らせ起動時に未インストールプラグインをインストールする
+ NeoBundleCheck
 
-" ファイルタイプ別のプラグイン/インデントを有効にする
-filetype plugin on
+ " ファイルタイプ別のプラグイン/インデントを有効にする
+ filetype plugin on
 "----------------------------------------------------"
 
 " smartcase有効化. 大文字が入力されるまで大文字小文字の区別を無視する
@@ -117,7 +147,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
 
 " エンターキーで補完候補の確定. スニペットの展開もエンターキーで確定
 imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
-" タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ
+"タブキーで補完候補の選択. スニペット内のジャンプもタブキーでジャンプ
 imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 
 "---------------------CompleCache設定----------------------------"
@@ -175,22 +205,6 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 """"""""""""""""""""""""""""""
 
 "----------------------------------------------------------
-" Syntasticの設定
-"----------------------------------------------------------
-" 構文エラー行に「>>」を表示
-let g:syntastic_enable_signs = 1
-" 他のVimプラグインと競合するのを防ぐ
-let g:syntastic_always_populate_loc_list = 1
-" 構文エラーリストを非表示
-let g:syntastic_auto_loc_list = 0
-" ファイルを開いた時に構文エラーチェックを実行する
-let g:syntastic_check_on_open = 1
-" 「:wq」で終了する時も構文エラーチェックする
-let g:syntastic_check_on_wq = 1
-
-let g:syntastic_cpp_compiler="gcc"
-
-"----------------------------------------------------------
 "Devicons
 "----------------------------------------------------------
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
@@ -218,7 +232,7 @@ let g:airline_section_x =
 let g:airline_section_y = '%3p%%'
 let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline_left_sep = '▶'
+"let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
 let g:airline_mode_map = {
 		\'n'  : 'の～まる',
